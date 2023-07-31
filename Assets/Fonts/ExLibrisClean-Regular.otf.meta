@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: d3b6362e044b20a4cb74857603ee2a78
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Exlibrisclean
+  - Rollthesixcombinedde
+  - Exlibris_clean_symbols
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: cf66ec86c4397b64a871f32481efb5d1, type: 3}
+  - {fileID: 12800000, guid: 5ae9101bb312e2640a68a47e6cbf16b9, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

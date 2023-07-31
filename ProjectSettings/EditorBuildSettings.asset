@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/NIVnote.unity
+    guid: 8bf4b08a422c5b34585ea5e0888dd139
+  - enabled: 0
+    path: Assets/Scenes/ExLibris_Icon.unity
+    guid: 3bc9b7b37dafd4c4f9403253d63e8ca0
+  - enabled: 0
+    path: Assets/Scenes/Intro.unity
+    guid: 4fca41d777490c744b032c86ae39804f
+  - enabled: 0
+    path: Assets/Scenes/AR_Touch.unity
+    guid: 349bc3bd59ae65e48b9ae77c695648e4
+  - enabled: 1
+    path: Assets/Scenes/BibleText.unity
+    guid: fa5b40a3722c88446b2e34b1a2b42d4a
+  - enabled: 1
+    path: Assets/Scenes/InBetween.unity
+    guid: 18ffb8cb73d084047b235faf29ba5eb8
+  - enabled: 1
+    path: Assets/Scenes/ExLibris_BlindMan.unity
+    guid: ab27bbeba3bed1b49b3115631aa00419
+  - enabled: 1
+    path: Assets/Scenes/AR_Touch_InGame.unity
+    guid: 0657689c0b7aeb34eafaa3340bcfeaad
+  m_configObjects: {}
