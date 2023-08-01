@@ -13,6 +13,14 @@ public class BiblioControl : MonoBehaviour
     //buttons to show up when first animation is finished:
     public GameObject[] charButtons;
 
+    //in game menu buttons:
+    public GameObject[] inGameButtons;
+    public bool inGameButShown = false;
+
+    //main menu buttons:
+    public GameObject[] mainMenu;
+    public bool mainMenuShown = false;
+
     public GameObject[] playedButtons;
 
     //menu buttons to minimize afer a certain time:
@@ -28,7 +36,8 @@ public class BiblioControl : MonoBehaviour
     public bool started = false;
     public bool charButShown = false;
 
-    
+
+
     //Special characters for better understanding in Start() and Update():
     public enum Chars
     {
@@ -71,37 +80,45 @@ public class BiblioControl : MonoBehaviour
 
         if (character == Chars.Menu)
         {
-            ShowCharButtons();
-            //SetSpeed(0.0f);
+            //ShowCharButtons();
+            SetSpeed(0.0f);
             HideUIElement(menuPauseButton);
-            ShowUIElement(menuPlayButton);
+            //ShowUIElement(menuPlayButton);
+            HideUIElement(menuPlayButton);
 
-            if (!PlayerPrefs.HasKey("bibleHint"))
-            {
-                HintManager hM = GameObject.Find("HintManager").GetComponent<HintManager>();
-                hM.ShowHints(true);
-                PlayerPrefs.SetInt("bibleHint",1);
-            }
+            ShowMainMenu(true);
+
+            ShowInGameButtons(false);
+
+            //if (!PlayerPrefs.HasKey("bibleHint"))
+            //{
+            //    HintManager hM = GameObject.Find("HintManager").GetComponent<HintManager>();
+            //    hM.ShowHints(true);
+            //    PlayerPrefs.SetInt("bibleHint",1);
+            //}
 
             //SetCam(Chars.Map);
         } //Hold Animation till hint message have been closed:
-
-        if (initialPause)
-            SetSpeed(0.0f);
+        else
+        {
+            ShowMainMenu(false);
+        }
+        //if (initialPause)
+        //    SetSpeed(0.0f);
 
         //Put Characters camera in front:
         if (character != Chars.Menu)
             cams[(int)character].depth = 5;
 
-        //Refresh played characters check symbol:
-        if (charButtons.Length == playedButtons.Length)
-        {   //beginning at index 1 (0 = map)
-            for (int i = 1; i < charButtons.Length; i++)
-            {
-                if (PlayerPrefs.HasKey("CharPlayed" + i.ToString()))
-                    GameObject.Find("MenuControl").GetComponent<MenuControl>().ShowUIElement(playedButtons[i]);
-            }
-        }
+        ////Refresh played characters check symbol:
+        //if (charButtons.Length == playedButtons.Length)
+        //{   //beginning at index 1 (0 = map)
+        //    for (int i = 1; i < charButtons.Length; i++)
+        //    {
+        //        if (PlayerPrefs.HasKey("CharPlayed" + i.ToString()))
+        //            GameObject.Find("MenuControl").GetComponent<MenuControl>().ShowUIElement(playedButtons[i]);
+        //    }
+        //}
     }
 
     
@@ -123,28 +140,28 @@ public class BiblioControl : MonoBehaviour
     void Update()
     {
         //Skip hint for continuing level (back from settings or bible text etc.):
-        if (!started)
-        {
-            if (GetSceneTime() > 0.1f && character != Chars.Menu)
-            {
-                HintManager hM = GameObject.Find("HintManager").GetComponent<HintManager>();
-                if (hM.HintsDisplayed()) { hM.ShowHints(false); }
-            }
-        }
+        //if (!started)
+        //{
+        //    if (GetSceneTime() > 0.1f && character != Chars.Menu)
+        //    {
+        //        HintManager hM = GameObject.Find("HintManager").GetComponent<HintManager>();
+        //        if (hM.HintsDisplayed()) { hM.ShowHints(false); }
+        //    }
+        //}
 
         //Set animaiton high speed to catch audio time, that has been set by stored time value:
         AnimHighSpeed(jumpAnimToAudio && !initialPause);
 
         //Start Animation after hint message have been closed (if menu isn't active):
-        StartAfterHint(!CharButtonsShown());
+        //StartAfterHint(!CharButtonsShown());
 
         //Hide Option buttons after some time to help fucus on game:
-        if (!hidden)
-        { 
-            if (!initialPause && hideTime > 0.0f) { hideTime -= Time.deltaTime; }
-            HideObjWhenZero(hideMenButtons, hideTime);
-            if (ShowObjWhenZero(showMenButtons, hideTime)) { hidden = true; }
-        }
+        //if (!hidden)
+        //{ 
+        //    if (!initialPause && hideTime > 0.0f) { hideTime -= Time.deltaTime; }
+        //    HideObjWhenZero(hideMenButtons, hideTime);
+        //    if (ShowObjWhenZero(showMenButtons, hideTime)) { hidden = true; }
+        //}
 
         if (audSrc.isPlaying)
             started = true;
@@ -194,7 +211,11 @@ public class BiblioControl : MonoBehaviour
     {
         SetCam((Chars)ch);
         Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.buildIndex-1);
+        //Debug.Log("SetCamAndRestart(" + ch.ToString() + ")");
+        //Debug.Log("SceneManager.LoadScene(" + (scene.buildIndex - 1).ToString() + ")");
+        //SceneManager.LoadScene(scene.buildIndex - 1);
+        //now reload current scene instead of "in between scene":
+        SceneManager.LoadScene(scene.buildIndex);
     }
 
     public void SetCam(Chars ch)
@@ -249,6 +270,26 @@ public class BiblioControl : MonoBehaviour
         {
             for (int i = 0; i < charButtons.Length; i++)
                 charButtons[i].SetActive(true);
+        }
+    }
+
+    public void ShowInGameButtons(bool activate)
+    {
+        inGameButShown = activate;
+        if (inGameButtons.Length > 0)
+        {
+            for (int i = 0; i < inGameButtons.Length; i++)
+                inGameButtons[i].SetActive(activate);
+        }
+    }
+
+    public void ShowMainMenu(bool activate)
+    {
+        mainMenuShown = activate;
+        if (mainMenu.Length > 0)
+        {
+            for (int i = 0; i < mainMenu.Length; i++)
+                mainMenu[i].SetActive(activate);
         }
     }
 
