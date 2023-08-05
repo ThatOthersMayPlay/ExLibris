@@ -41,8 +41,8 @@ public class BiblioControl : MonoBehaviour
     //Special characters for better understanding in Start() and Update():
     public enum Chars
     {
-        Menu = -1, Map = 0, Barto = 1, Jesus = 2,
-        Des1 = 3, Des2 = 4, Des3 = 5, Des4 = 6, Des5 = 7,
+        Menu = -1, Map = 0, BlindMan = 1, Jesus = 2,
+        Des1 = 3, Des2 = 4, GetUp = 5, Des4 = 6, BeQuiet = 7,
         Cust1 = 8, Cust2 = 9, Cust3 = 10, Cust4 = 11, Cust5 = 12
     }
     public static Chars character = Chars.Map;
@@ -67,6 +67,18 @@ public class BiblioControl : MonoBehaviour
 
     public bool initialPause = true;
 
+    //Buttons, Particle System and Time for buttons to appear (speaking out phrases):
+    public GameObject[] phraseBut;
+    //public ParticleSystem[] phraseFire;
+    public float[] phraseStartTime;
+    public float[] phraseEndTime;
+    public float phraseTimer = 0.0f;
+
+    //black transparent image to darken sight of blind man:
+    public GameObject blackImage;
+    public float healingTimer = 0.0f;
+    public float healingTime = 72.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,8 +89,12 @@ public class BiblioControl : MonoBehaviour
         else
             SetSceneTime(0.0f);
 
+        if (character == Chars.BlindMan)
+        {
+            blackImage.SetActive(true);
+        }
 
-        if (character == Chars.Menu)
+            if (character == Chars.Menu)
         {
             //ShowCharButtons();
             SetSpeed(0.0f);
@@ -121,6 +137,10 @@ public class BiblioControl : MonoBehaviour
         //}
     }
 
+    //public void FirePhrase()
+    //{
+    //    phraseFire[(int)character].Play();
+    //}
     
     //Apply the stored point on the timeline to the animations and audio source:
     public void ApplySceneTime()
@@ -139,6 +159,29 @@ public class BiblioControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Activate phrase control / particle system of current character:
+        phraseTimer += Time.deltaTime;
+
+        if ((int)character < phraseBut.Length && (int)character > -1)
+        {
+            //Debug.Log(((int)character).ToString());
+
+            if (phraseTimer > phraseStartTime[(int)character])
+                phraseBut[(int)character].SetActive(true);
+
+            if (phraseTimer > phraseEndTime[(int)character])
+                phraseBut[(int)character].SetActive(false);
+        }
+
+        //deactivate UI image that darkens the screen of the blind man, when he gets healed:
+        if (character == Chars.BlindMan && blackImage.activeInHierarchy)
+        {
+            if (healingTimer < healingTime)
+                healingTimer += Time.deltaTime;
+            else
+                blackImage.SetActive(false);
+        }
+
         //Skip hint for continuing level (back from settings or bible text etc.):
         //if (!started)
         //{
