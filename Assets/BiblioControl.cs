@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class BiblioControl : MonoBehaviour
@@ -72,16 +73,34 @@ public class BiblioControl : MonoBehaviour
     //public ParticleSystem[] phraseFire;
     public float[] phraseStartTime;
     public float[] phraseEndTime;
-    public float phraseTimer = 0.0f;
+    public float gameTimer = 0.0f;
+    public float phraseButAlpha = 1.0f;
+    public float phraseButHideTime = 1.0f;
+    public float phraseButHideTimer = 0.0f;
 
     //black transparent image to darken sight of blind man:
     public GameObject blackImage;
     public float healingTimer = 0.0f;
     public float healingTime = 72.0f;
 
+    //control play menu for play and pause and progressbar:
+    public float pauseMenuTime = 1.0f;
+    public float pauseMenuTimer = 1.0f;
+    public GameObject pauseMenuByTabBut;
+    public GameObject[] pauseMenButtons;
+    public GameObject pauseBut;
+
+    //manage progress bar (shown in pause menu):
+    public Rect fullBar;
+    public Rect progressBar;
+    public RectTransform progressBarT;
+    public float pixelsPerSec = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
+        ConfigProgressBar();
+
         if (GetSceneTime() > 0.1f && character != Chars.Menu)
         {
             ApplySceneTime();
@@ -114,6 +133,10 @@ public class BiblioControl : MonoBehaviour
             //}
 
             //SetCam(Chars.Map);
+
+            //hide invisible button to activate pause menu:
+            pauseMenuByTabBut.SetActive(false);
+
         } //Hold Animation till hint message have been closed:
         else
         {
@@ -141,7 +164,58 @@ public class BiblioControl : MonoBehaviour
     //{
     //    phraseFire[(int)character].Play();
     //}
-    
+
+    public void FireHideBut()
+    {
+        Image fireBut = phraseBut[(int)character].GetComponent<Image>();
+        Color newCol = fireBut.color;
+        newCol.a = 0.0f;
+        fireBut.color = newCol;
+    }
+
+    //hide pause menu with timer:
+    public void HidePauseMenu(bool hide)
+    {
+        if (hide)
+        {
+            if (!pauseMenuByTabBut.activeInHierarchy && pauseMenuTimer < pauseMenuTime)
+            {
+                pauseMenuTimer += Time.deltaTime;
+            }
+            else
+            {
+                pauseMenuByTabBut.SetActive(true);
+                for (int i = 0; i < pauseMenButtons.Length; i++)
+                    pauseMenButtons[i].SetActive(false);
+            }
+        }
+        else if (pauseMenuTimer > 0.0f)
+            pauseMenuTimer = 0.0f;
+    }
+
+    //hide pause menu without timer:
+    public void HidePauseMenu()
+    {
+        pauseMenuByTabBut.SetActive(true);
+        for (int i = 0; i < pauseMenButtons.Length; i++)
+            pauseMenButtons[i].SetActive(false);
+    }
+
+    public void ConfigProgressBar()
+    {
+        progressBar = progressBarT.rect;
+        float clipSeconds = audSrc.clip.length;
+        pixelsPerSec = progressBar.width / clipSeconds;
+    }
+
+    public void UpdateProgressBar(bool upd)
+    {
+        
+        progressBar.width = gameTimer * pixelsPerSec;
+        Vector2 newRect = new Vector2(progressBar.width, progressBar.height);
+        progressBarT.sizeDelta = newRect;
+    }
+
     //Apply the stored point on the timeline to the animations and audio source:
     public void ApplySceneTime()
     {
@@ -160,17 +234,38 @@ public class BiblioControl : MonoBehaviour
     void Update()
     {
         //Activate phrase control / particle system of current character:
-        phraseTimer += Time.deltaTime;
+        if (speed == 1.0f)
+            gameTimer += Time.deltaTime;
 
+        //if other character than menu is selected:
         if ((int)character < phraseBut.Length && (int)character > -1)
         {
             //Debug.Log(((int)character).ToString());
-
-            if (phraseTimer > phraseStartTime[(int)character])
+            //activate phrase button at certain time:
+            if (gameTimer > phraseStartTime[(int)character])
                 phraseBut[(int)character].SetActive(true);
-
-            if (phraseTimer > phraseEndTime[(int)character])
+            //deactivate phrase button at certain time:
+            if (gameTimer > phraseEndTime[(int)character])
                 phraseBut[(int)character].SetActive(false);
+
+            //make fire phrase button transparent for a certain time when fired:
+            Image fireBut = phraseBut[(int)character].GetComponent<Image>();
+            if (phraseButAlpha == 1.0f)
+                phraseButAlpha = fireBut.color.a;
+
+            if (fireBut.color.a == 0.0f && phraseButHideTimer < phraseButHideTime)
+                phraseButHideTimer += Time.deltaTime;
+            else
+            {
+                Color newCol = fireBut.color;
+                newCol.a = phraseButAlpha;
+                fireBut.color = newCol;
+                phraseButHideTimer = 0.0f;
+            }
+
+            //deactivate pause and progressbar elements after a certain time when pause is not pressed:
+            HidePauseMenu(pauseBut.activeInHierarchy);
+            UpdateProgressBar(!pauseMenuByTabBut.activeInHierarchy);
         }
 
         //deactivate UI image that darkens the screen of the blind man, when he gets healed:
@@ -294,11 +389,19 @@ public class BiblioControl : MonoBehaviour
 
     public void Play()
     {
-        if (speed == 1.0f)
-            speed = 7.0f;
-        else
+        //if (speed == 1.0f)
+        //    speed = 7.0f;
+        //else
             speed = 1.0f;
     }
+    public void Pause()
+    {
+        //if (speed == 1.0f)
+        //    speed = 7.0f;
+        //else
+        speed = 0.0f;
+    }
+
 
     public void ActivateButAndRestart()
     {
