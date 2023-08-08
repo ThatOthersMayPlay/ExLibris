@@ -7,7 +7,7 @@ using System;
 public class RotateCam : MonoBehaviour
 {
     public Gyroscope gyros;
-    public bool gyroAvailable = true;
+    //public bool gyroAvailable = true;
     public float xx = 0.0f;
     //public float yy = 0.0f;
     //public float zz = 0.0f;
@@ -25,29 +25,21 @@ public class RotateCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Make sure device supprts Gyroscope
-        if (!SystemInfo.supportsGyroscope)
-        {
-            //Debug.Log("Device does not support Gyroscopoe");
-            gyroAvailable = false;
-        }
-
-
-        if (gyroAvailable)
+        if (BiblioControl.gyroAvailable && BiblioControl.useSensors)
         {
             gyros = Input.gyro;
             gyros.enabled = true;    // Must enable the gyroscope
-            FollowMobile(BiblioControl.useSenesors);
+            FollowMobile(BiblioControl.useSensors);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gyroAvailable)
-            FollowMobile(BiblioControl.useSenesors);
+        if (BiblioControl.gyroAvailable && BiblioControl.useSensors)
+            FollowMobile(BiblioControl.useSensors);
 
-        RotateByTouch(BiblioControl.useSenesors);
+        //RotateByTouch(BiblioControl.useSensors);
     }
 
     void FollowMobile(bool follow)
@@ -56,27 +48,27 @@ public class RotateCam : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, gyros.attitude, Time.deltaTime * rotatespeed);
     }
 
-    void RotateByTouch(bool byTouch)
-    {
-        if (!byTouch)
-        {
-            if (Input.touchCount == 1)
-            {
-                Touch myT = Input.GetTouch(0);
-                if (myT.phase == TouchPhase.Began)
-                {
-                    tStartPos = myT.position;
-                }
-                else if (myT.phase == TouchPhase.Moved)
-                {
+    //void RotateByTouch(bool byTouch)
+    //{
+    //    if (!byTouch)
+    //    {
+    //        if (Input.touchCount == 1)
+    //        {
+    //            Touch myT = Input.GetTouch(0);
+    //            if (myT.phase == TouchPhase.Began)
+    //            {
+    //                tStartPos = myT.position;
+    //            }
+    //            else if (myT.phase == TouchPhase.Moved)
+    //            {
 
-                    //float mySp = Time.deltaTime * rotatespeed;
-                    transform.Rotate(myT.deltaPosition.y * Time.deltaTime * 40, -myT.deltaPosition.x * Time.deltaTime * 40, 0, Space.Self);
-                    //transform.rotation = Quaternion.Lerp(transform.rotation, transform.rotation, Time.deltaTime * rotatespeed);
-                }
-            }
-        }
-    }
+    //                //float mySp = Time.deltaTime * rotatespeed;
+    //                transform.Rotate(myT.deltaPosition.y * Time.deltaTime * 40, -myT.deltaPosition.x * Time.deltaTime * 40, 0, Space.Self);
+    //                //transform.rotation = Quaternion.Lerp(transform.rotation, transform.rotation, Time.deltaTime * rotatespeed);
+    //            }
+    //        }
+    //    }
+    //}
 
     public float GetTestV(int inp)
     {

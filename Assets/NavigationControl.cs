@@ -9,9 +9,9 @@ public class NavigationControl : MonoBehaviour
 
     public void SwitchSensorControl()
     {
-        if (BiblioControl.useSenesors)
-            BiblioControl.useSenesors = false;
+        if (BiblioControl.useSensors)
+            BiblioControl.useSensors = false;
         else
-            BiblioControl.useSenesors = true;
+            BiblioControl.useSensors = true;
     }
 }

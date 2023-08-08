@@ -50,7 +50,13 @@ public class BiblioControl : MonoBehaviour
 
     public int tempChar = -1;
 
-    public static bool useSenesors = true;
+    //Availability and activation of Gyroscope control:
+    public static bool useSensors = true;
+    public static bool gyroAvailable = false;
+
+    //buttons to show when gyposcope available or not:
+    public GameObject sensOnBut;
+    public GameObject sensNABut;
 
     public Camera[] cams;
 
@@ -96,10 +102,26 @@ public class BiblioControl : MonoBehaviour
     public RectTransform progressBarT;
     public float pixelsPerSec = 1.0f;
 
+    ////sensor mode or follow mode:
+    //public static bool sensorMode = true;
+
+    //Selection of Animation to trigger at Start according to follow mode or sensor mode:
+    public Animator[] charAnims;
+
     // Start is called before the first frame update
     void Start()
     {
         ConfigProgressBar();
+
+        // Make sure device supprts Gyroscope
+        if (SystemInfo.supportsGyroscope)
+        {
+            //Debug.Log("Device does support Gyroscopoe");
+            gyroAvailable = true;
+            sensNABut.SetActive(false);
+        }
+        else
+            sensOnBut.SetActive(false);
 
         if (GetSceneTime() > 0.1f && character != Chars.Menu)
         {
@@ -149,6 +171,15 @@ public class BiblioControl : MonoBehaviour
         if (character != Chars.Menu)
             cams[(int)character].depth = 5;
 
+        //Activate Characters animation with or without animated camera according to follow mode or sensor mode:
+        if (character != Chars.Menu)
+        {
+            if (gyroAvailable && useSensors)
+                charAnims[(int)character].SetTrigger("TgBM");
+            else
+                charAnims[(int)character].SetTrigger("TgBMC");
+        }
+
         ////Refresh played characters check symbol:
         //if (charButtons.Length == playedButtons.Length)
         //{   //beginning at index 1 (0 = map)
@@ -164,6 +195,12 @@ public class BiblioControl : MonoBehaviour
     //{
     //    phraseFire[(int)character].Play();
     //}
+
+    //switch between sensor and follow mode:
+    public void SensorModeOn(bool on)
+    {
+        useSensors = on;
+    }
 
     public void FireHideBut()
     {
