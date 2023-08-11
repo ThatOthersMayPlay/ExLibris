@@ -36,8 +36,8 @@ public class RotateCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (BiblioControl.gyroAvailable && BiblioControl.useSensors)
-            FollowMobile(BiblioControl.useSensors);
+        if (BiblioControl.gyroAvailable && BiblioControl.useSensors && BiblioControl.gyroAvailable)
+            FollowMobile(true);
 
         //RotateByTouch(BiblioControl.useSensors);
     }
