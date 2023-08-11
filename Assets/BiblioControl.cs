@@ -113,16 +113,6 @@ public class BiblioControl : MonoBehaviour
     {
         ConfigProgressBar();
 
-        // Make sure device supprts Gyroscope
-        if (SystemInfo.supportsGyroscope)
-        {
-            //Debug.Log("Device does support Gyroscopoe");
-            gyroAvailable = true;
-            sensNABut.SetActive(false);
-        }
-        else
-            sensOnBut.SetActive(false);
-
         if (GetSceneTime() > 0.1f && character != Chars.Menu)
         {
             ApplySceneTime();
@@ -144,6 +134,16 @@ public class BiblioControl : MonoBehaviour
             HideUIElement(menuPlayButton);
 
             ShowMainMenu(true);
+
+        // Make sure device supprts Gyroscope
+        if (SystemInfo.supportsGyroscope)
+        {
+            //Debug.Log("Device does support Gyroscopoe");
+            gyroAvailable = true;
+            sensNABut.SetActive(false);
+        }
+        else
+            sensOnBut.SetActive(false);
 
             ShowInGameButtons(false);
 
