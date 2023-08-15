@@ -28,7 +28,7 @@ public class BiblioControl : MonoBehaviour
     public GameObject[] hideMenButtons;
     public GameObject[] showMenButtons;
     public float hideTime = 2.5f;
-    private bool hidden = false;
+    //private bool hidden = false;
 
     //game speed for testing / adjustment:
     public float speed = 1.0f;
@@ -56,7 +56,9 @@ public class BiblioControl : MonoBehaviour
 
     //buttons to show when gyposcope available or not:
     public GameObject sensOnBut;
+    public GameObject sensOffBut;
     public GameObject sensNABut;
+    //public GameObject testBut;
 
     public Camera[] cams;
 
@@ -135,15 +137,20 @@ public class BiblioControl : MonoBehaviour
 
             ShowMainMenu(true);
 
-        // Make sure device supprts Gyroscope
-        if (SystemInfo.supportsGyroscope)
-        {
-            //Debug.Log("Device does support Gyroscopoe");
-            gyroAvailable = true;
-            sensNABut.SetActive(false);
-        }
-        else
-            sensOnBut.SetActive(false);
+            ActivateSensorButtons();
+
+            LoadSensorMode();
+
+        //// Make sure device supprts Gyroscope
+        //if (SystemInfo.supportsGyroscope)
+        //{
+        //    //Debug.Log("Device does support Gyroscopoe");
+        //    gyroAvailable = true;
+        //    sensNABut.SetActive(false);
+        //        //testBut.SetActive(false);
+        //}
+        //else
+        //    sensOnBut.SetActive(false);
 
             ShowInGameButtons(false);
 
@@ -196,10 +203,81 @@ public class BiblioControl : MonoBehaviour
     //    phraseFire[(int)character].Play();
     //}
 
+    //Load Sensor mode from PlayerPrefs and deactivate sensor buttons when no sensor available:
+    public void LoadSensorMode()
+    {
+        // Make sure device supprts Gyroscope
+        if (!SystemInfo.supportsGyroscope)
+        {
+            gyroAvailable = false;
+            //sensOnBut.SetActive(false);
+            //sensOffBut.SetActive(false);
+            //sensNABut.SetActive(true);
+            SensorModeOn(false);
+        }
+        else if (PlayerPrefs.HasKey("sensorMode"))
+        {
+            if (PlayerPrefs.GetString("sensorMode") == "on")
+            {
+                //sensOnBut.SetActive(true);
+                //sensOffBut.SetActive(false);
+                //sensNABut.SetActive(false);
+                SensorModeOn(true);
+            }
+            else if (PlayerPrefs.GetString("sensorMode") == "off")
+            {
+                //sensOnBut.SetActive(false);
+                //sensOffBut.SetActive(true);
+                //sensNABut.SetActive(false);
+                SensorModeOn(false);
+            }
+        }
+    }
+
+    public void ActivateSensorButtons()
+    {
+        // Make sure device supprts Gyroscope
+        if (!SystemInfo.supportsGyroscope)
+        {
+            sensOnBut.SetActive(false);
+            sensOffBut.SetActive(false);
+            sensNABut.SetActive(true);
+        }
+        else if (PlayerPrefs.HasKey("sensorMode"))
+        {
+            if (PlayerPrefs.GetString("sensorMode") == "on")
+            {
+                sensOnBut.SetActive(true);
+                sensOffBut.SetActive(false);
+                sensNABut.SetActive(false);
+            }
+            else if (PlayerPrefs.GetString("sensorMode") == "off")
+            {
+                sensOnBut.SetActive(false);
+                sensOffBut.SetActive(true);
+                sensNABut.SetActive(false);
+            }
+        }
+    }
+
+    //Save Sensor mode to PlayerPrefs:
+    public void SaveSensorMode()
+    {
+        // Make sure device supprts Gyroscope
+        if (SystemInfo.supportsGyroscope)
+        {
+            if (useSensors)
+                PlayerPrefs.SetString("sensorMode", "on");
+            else
+                PlayerPrefs.SetString("sensorMode", "off");
+        }
+    }
+
     //switch between sensor and follow mode:
     public void SensorModeOn(bool on)
     {
         useSensors = on;
+        //SaveSensorMode();
     }
 
     public void FireHideBut()
