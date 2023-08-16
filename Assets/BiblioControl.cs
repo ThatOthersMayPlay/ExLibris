@@ -137,9 +137,9 @@ public class BiblioControl : MonoBehaviour
 
             ShowMainMenu(true);
 
-            ActivateSensorButtons();
-
             LoadSensorMode();
+
+            ActivateSensorButtons();
 
         //// Make sure device supprts Gyroscope
         //if (SystemInfo.supportsGyroscope)
@@ -243,21 +243,18 @@ public class BiblioControl : MonoBehaviour
             sensOffBut.SetActive(false);
             sensNABut.SetActive(true);
         }
-        else if (PlayerPrefs.HasKey("sensorMode"))
-        {
-            if (PlayerPrefs.GetString("sensorMode") == "on")
+        else if (useSensors)
             {
                 sensOnBut.SetActive(true);
                 sensOffBut.SetActive(false);
                 sensNABut.SetActive(false);
             }
-            else if (PlayerPrefs.GetString("sensorMode") == "off")
+            else
             {
                 sensOnBut.SetActive(false);
                 sensOffBut.SetActive(true);
                 sensNABut.SetActive(false);
             }
-        }
     }
 
     //Save Sensor mode to PlayerPrefs:
