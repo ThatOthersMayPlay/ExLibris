@@ -181,7 +181,7 @@ public class BiblioControl : MonoBehaviour
         //Activate Characters animation with or without animated camera according to follow mode or sensor mode:
         if (character != Chars.Menu)
         {
-            if (gyroAvailable && useSensors)
+            if (useSensors)
                 charAnims[(int)character].SetTrigger("TgBM");
             else
                 charAnims[(int)character].SetTrigger("TgBMC");
@@ -215,7 +215,10 @@ public class BiblioControl : MonoBehaviour
             //sensNABut.SetActive(true);
             SensorModeOn(false);
         }
-        else if (PlayerPrefs.HasKey("sensorMode"))
+        else
+{
+gyroAvailable = true;
+if (PlayerPrefs.HasKey("sensorMode"))
         {
             if (PlayerPrefs.GetString("sensorMode") == "on")
             {
@@ -231,6 +234,7 @@ public class BiblioControl : MonoBehaviour
                 //sensNABut.SetActive(false);
                 SensorModeOn(false);
             }
+          }
         }
     }
 
