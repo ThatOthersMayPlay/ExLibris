@@ -623,7 +623,11 @@ MonoBehaviour:
     Prayer
 
 
-    Self-reflection'
+    Self-reflection
+
+
+    Sensor
+    Mode'
 --- !u!222 &1097724503
 CanvasRenderer:
   m_ObjectHideFlags: 0
