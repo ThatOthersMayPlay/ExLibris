@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/InBetween.unity
     guid: 18ffb8cb73d084047b235faf29ba5eb8
   - enabled: 1
+    path: Assets/Scenes/RecomIn.unity
+    guid: e96097630f57cb5448abcce430281b9e
+  - enabled: 1
     path: Assets/Scenes/ExLibris_BlindMan.unity
     guid: ab27bbeba3bed1b49b3115631aa00419
   - enabled: 1

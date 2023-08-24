@@ -127,7 +127,7 @@ public class BiblioControl : MonoBehaviour
             blackImage.SetActive(true);
         }
 
-            if (character == Chars.Menu)
+        if (character == Chars.Menu)
         {
             //ShowCharButtons();
             SetSpeed(0.0f);
@@ -141,16 +141,16 @@ public class BiblioControl : MonoBehaviour
 
             ActivateSensorButtons();
 
-        //// Make sure device supprts Gyroscope
-        //if (SystemInfo.supportsGyroscope)
-        //{
-        //    //Debug.Log("Device does support Gyroscopoe");
-        //    gyroAvailable = true;
-        //    sensNABut.SetActive(false);
-        //        //testBut.SetActive(false);
-        //}
-        //else
-        //    sensOnBut.SetActive(false);
+            //// Make sure device supprts Gyroscope
+            //if (SystemInfo.supportsGyroscope)
+            //{
+            //    //Debug.Log("Device does support Gyroscopoe");
+            //    gyroAvailable = true;
+            //    sensNABut.SetActive(false);
+            //        //testBut.SetActive(false);
+            //}
+            //else
+            //    sensOnBut.SetActive(false);
 
             ShowInGameButtons(false);
 
@@ -202,6 +202,11 @@ public class BiblioControl : MonoBehaviour
     //{
     //    phraseFire[(int)character].Play();
     //}
+
+    public void LoadLv(int lv)
+    {
+        SceneManager.LoadScene(lv);
+    }
 
     //Load Sensor mode from PlayerPrefs and deactivate sensor buttons when no sensor available:
     public void LoadSensorMode()
