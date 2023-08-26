@@ -43,18 +43,20 @@ public class FadeOutImage : MonoBehaviour
         }
         else//if touch doesn't affect level change set ready for level change:
             readyForNextLv = true;
-        
-        if (timer > 0.0f && readyForNextLv)
+
+        if (readyForNextLv)
         {
-            timer -= Time.deltaTime;
-            if (timer <= fadeTimer)
+            if (timer > 0.0f)
             {
-                fadeColor.a += Time.deltaTime;
-                fadeOutUI.color = fadeColor;
-            }
-        }//must be ready for next level:
-        else if (toNextLevel)
-            MenuControl.NextLevel(lv);
-        
+                timer -= Time.deltaTime;
+                if (timer <= fadeTimer)
+                {
+                    fadeColor.a += Time.deltaTime;
+                    fadeOutUI.color = fadeColor;
+                }
+            }//must be ready for next level:
+            else if (toNextLevel)
+                MenuControl.NextLevel(lv);
+        }
     }
 }
