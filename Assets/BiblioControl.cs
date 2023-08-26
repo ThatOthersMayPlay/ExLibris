@@ -99,16 +99,24 @@ public class BiblioControl : MonoBehaviour
     public GameObject pauseBut;
 
     //manage progress bar (shown in pause menu):
-    public Rect fullBar;
-    public Rect progressBar;
-    public RectTransform progressBarT;
-    public float pixelsPerSec = 1.0f;
+    //public Rect fullBar;
+    //public Rect progressBar;
+    //public RectTransform progressBarT;
+    public float progPerSec = 1.0f;
+    public Slider proBar;
 
     ////sensor mode or follow mode:
     //public static bool sensorMode = true;
 
     //Selection of Animation to trigger at Start according to follow mode or sensor mode:
     public Animator[] charAnims;
+
+    public GameObject title;
+    public GameObject subTitle;
+    public GameObject verse;
+    public GameObject verseSmall;
+    public float titleTimer = 0.0f;
+    public float titleTime = 2.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -196,12 +204,56 @@ public class BiblioControl : MonoBehaviour
         //            GameObject.Find("MenuControl").GetComponent<MenuControl>().ShowUIElement(playedButtons[i]);
         //    }
         //}
+
+        ShowTitleAndVerse();
     }
 
     //public void FirePhrase()
     //{
     //    phraseFire[(int)character].Play();
     //}
+
+
+    //Setup title/verse setting for Intro, Menu and game:
+    public void ShowTitleAndVerse()
+    {
+        if (character == Chars.Menu)
+        {
+            title.SetActive(true);
+            subTitle.SetActive(false);
+            verse.SetActive(false);
+            verseSmall.SetActive(false);
+        }
+        else if (character == Chars.Map)
+        {
+            title.SetActive(true);
+            subTitle.SetActive(true);
+            verse.SetActive(true);
+            verseSmall.SetActive(false);
+        }
+        else
+        {
+            title.SetActive(false);
+            subTitle.SetActive(false);
+            verse.SetActive(false);
+            verseSmall.SetActive(true);
+        }
+    }
+
+    //Fade out title/verse for Intro, Menu and game:
+    public void FadeOutTitleAndVerse(bool active)
+    {
+        if (active)
+            titleTimer += Time.deltaTime;
+        else
+        {
+            title.SetActive(false);
+            subTitle.SetActive(false);
+            verse.SetActive(false);
+            verseSmall.SetActive(false);
+        }
+    }
+
 
     public void LoadLv(int lv)
     {
@@ -324,17 +376,17 @@ if (PlayerPrefs.HasKey("sensorMode"))
 
     public void ConfigProgressBar()
     {
-        progressBar = progressBarT.rect;
+        //progressBar = progressBarT.rect;
         float clipSeconds = audSrc.clip.length;
-        pixelsPerSec = progressBar.width / clipSeconds;
+        progPerSec = 1.0f / clipSeconds;
     }
 
     public void UpdateProgressBar(bool upd)
     {
-        
-        progressBar.width = gameTimer * pixelsPerSec;
-        Vector2 newRect = new Vector2(progressBar.width, progressBar.height);
-        progressBarT.sizeDelta = newRect;
+        proBar.value = gameTimer * progPerSec;
+        //progressBar.width = gameTimer * progPerSec;
+        //Vector2 newRect = new Vector2(progressBar.width, progressBar.height);
+        //progressBarT.sizeDelta = newRect;
     }
 
     //Apply the stored point on the timeline to the animations and audio source:
@@ -354,6 +406,8 @@ if (PlayerPrefs.HasKey("sensorMode"))
     // Update is called once per frame
     void Update()
     {
+        FadeOutTitleAndVerse(titleTimer < titleTime);
+
         //Activate phrase control / particle system of current character:
         if (speed == 1.0f)
             gameTimer += Time.deltaTime;

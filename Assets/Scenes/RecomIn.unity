@@ -526,7 +526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f226cddcf84c98241968c8d0d11b44a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 3
+  timer: 4
   fadeOutUI: {fileID: 2132872961}
   toNextLevel: 1
   lv: 1
@@ -578,7 +578,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -45.63}
   m_SizeDelta: {x: 650, y: 1223}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1097724502
@@ -607,7 +607,7 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 4
-    m_MaxSize: 80
+    m_MaxSize: 72
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -617,17 +617,25 @@ MonoBehaviour:
   m_Text: 'Recommendations:
 
 
-    A quiet place
+
+    Find a quiet place
+
+
+    Read Mark
+
+    10, 46-52
 
 
     Prayer
 
 
-    Self-reflection
+    Self-Reflection
 
 
-    Sensor
-    Mode'
+    Move
+    with
+
+    your Character'
 --- !u!222 &1097724503
 CanvasRenderer:
   m_ObjectHideFlags: 0

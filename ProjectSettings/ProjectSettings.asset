@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Cusquea Games - Achim Dieterle
-  productName: ExLibris
+  productName: Ex Libris - The Blind Man
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -261,7 +261,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 93a99b49e0b36ab4a9647bc224592a15, type: 3}
+      m_Icon: {fileID: 2800000, guid: 5e1bb08b8779d224ea67d6e8adb7f7bf, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
