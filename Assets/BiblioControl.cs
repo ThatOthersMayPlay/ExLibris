@@ -247,7 +247,9 @@ public class BiblioControl : MonoBehaviour
             titleTimer += Time.deltaTime;
         else
         {
-            title.SetActive(false);
+            if (character != Chars.Menu)
+                title.SetActive(false);
+
             subTitle.SetActive(false);
             verse.SetActive(false);
             verseSmall.SetActive(false);

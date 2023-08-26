@@ -19,6 +19,10 @@ public class FadeOutImage : MonoBehaviour
     public bool toNextLevel = true;
     public int lv = 1;
 
+    //enable wait for next level by touch:
+    public bool waitForNoTouch = true;
+    public bool readyForNextLv = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,8 +33,18 @@ public class FadeOutImage : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (timer > 0.0f)
+    {   //only 
+        if (waitForNoTouch)
+        {   //check if touch active - then wait with level change:
+            if (Input.touchCount > 0)
+                readyForNextLv = false;
+            else
+                readyForNextLv = true;
+        }
+        else//if touch doesn't affect level change set ready for level change:
+            readyForNextLv = true;
+        
+        if (timer > 0.0f && readyForNextLv)
         {
             timer -= Time.deltaTime;
             if (timer <= fadeTimer)
@@ -38,8 +52,9 @@ public class FadeOutImage : MonoBehaviour
                 fadeColor.a += Time.deltaTime;
                 fadeOutUI.color = fadeColor;
             }
-        }
+        }//must be ready for next level:
         else if (toNextLevel)
             MenuControl.NextLevel(lv);
+        
     }
 }
