@@ -483,6 +483,12 @@ if (PlayerPrefs.HasKey("sensorMode"))
 
         if (!audSrc.isPlaying && started && !charButShown)
         {
+            if (character == Chars.Map)
+            {
+                SetCam((int)Chars.Menu);
+                SceneManager.LoadScene(11);
+            }
+
             SetCamAndRestart((int)Chars.Menu);
         }
 

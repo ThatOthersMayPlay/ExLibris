@@ -394,35 +394,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d3b6362e044b20a4cb74857603ee2a78, type: 3}
-    m_FontSize: 40
+    m_FontSize: 60
     m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 4
-    m_MaxSize: 69
+    m_MaxSize: 75
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 0.97
-  m_Text: 'Find a quiet place
-
-
-    Read Mark
-
-    10, 46-52
-
-
-    Prayer
-
-
-    Self-Reflection
-
-
-    Move
-    with
-
-    your Character'
+    m_LineSpacing: 1.1
+  m_Text: Read Mark 10, 46-52
 --- !u!222 &462456687
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -622,12 +605,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f226cddcf84c98241968c8d0d11b44a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 5
+  timer: 4
   fadeOutUI: {fileID: 2132872961}
   toNextLevel: 1
   lv: 1
   waitForNoTouch: 1
   readyForNextLv: 0
+  touchTime: 0
+  mainScene: 4
+  skipToMainScene: 1
 --- !u!4 &662351863
 Transform:
   m_ObjectHideFlags: 0
@@ -659,7 +645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1097724501
 RectTransform:
   m_ObjectHideFlags: 0
@@ -712,7 +698,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.9
-  m_Text: 'Recommendations:'
+  m_Text: "find a quiet place\nwhere\r you can\nfocus and reflect"
 --- !u!222 &1097724503
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1122,7 +1108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1364130209
 RectTransform:
   m_ObjectHideFlags: 0

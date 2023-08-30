@@ -10,7 +10,9 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - Exlibrisde
-  fallbackFontReferences: []
+  - C0to9_regular
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d08752f9e83ac6d449a7d97f8f1edc67, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

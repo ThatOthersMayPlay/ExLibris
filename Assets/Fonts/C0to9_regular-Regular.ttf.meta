@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d3b6362e044b20a4cb74857603ee2a78
+guid: d08752f9e83ac6d449a7d97f8f1edc67
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -10,11 +10,7 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - C0to9_regular
-  - Exlibrisclean
-  - Exlibris_clean_symbols
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: d08752f9e83ac6d449a7d97f8f1edc67, type: 3}
-  - {fileID: 12800000, guid: cf66ec86c4397b64a871f32481efb5d1, type: 3}
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

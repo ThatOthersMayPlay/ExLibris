@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class FadeOutImage : MonoBehaviour
 {
-    //Show quotation note for NIV translation for a second
+    //Show a message for a certain time:
     public float timer = 3.0f;
     private float fadeTimer = 1.0f;
 
@@ -23,6 +23,14 @@ public class FadeOutImage : MonoBehaviour
     public bool waitForNoTouch = true;
     public bool readyForNextLv = false;
 
+    public float touchTime = 0.0f;
+
+    public int mainScene = -1;
+    public bool skipToMainScene = false;
+
+    public bool useBuildIndex = false;
+    public int buildInd = -1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +41,22 @@ public class FadeOutImage : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   //only 
+    {
+        if (Input.touchCount > 0)
+        {
+            touchTime += Time.deltaTime;
+            if (Input.touches[0].phase == TouchPhase.Ended && touchTime < 0.2f)
+            {
+                if (skipToMainScene && mainScene != -1)
+                    SceneManager.LoadScene(mainScene);
+                else
+                    MenuControl.NextLevel(lv);
+            }
+        }
+        else
+            touchTime = 0.0f;
+
+        //only 
         if (waitForNoTouch)
         {   //check if touch active - then wait with level change:
             if (Input.touchCount > 0)
@@ -56,7 +79,12 @@ public class FadeOutImage : MonoBehaviour
                 }
             }//must be ready for next level:
             else if (toNextLevel)
-                MenuControl.NextLevel(lv);
+            {
+                if (useBuildIndex && buildInd != -1)
+                    SceneManager.LoadScene(buildInd);
+                else
+                    MenuControl.NextLevel(lv);
+            }
         }
     }
 }
