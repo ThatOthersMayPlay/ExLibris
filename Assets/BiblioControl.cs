@@ -90,6 +90,8 @@ public class BiblioControl : MonoBehaviour
     public GameObject blackImage;
     public float healingTimer = 0.0f;
     public float healingTime = 72.0f;
+    //component of post-processing for distortion effect:
+    public GameObject postProc;
 
     //control play menu for play and pause and progressbar:
     public float pauseMenuTime = 1.0f;
@@ -118,6 +120,16 @@ public class BiblioControl : MonoBehaviour
     public float titleTimer = 0.0f;
     public float titleTime = 2.0f;
 
+    //Control music in main menu:
+    public AudioSource musicSrc;
+
+    public GameObject gRasterBM;
+    public GameObject gRasterCU;
+    public GameObject gRasterBQ;
+
+    public float rasterTime = 2.0f;
+    public float rasterTimer = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -133,10 +145,24 @@ public class BiblioControl : MonoBehaviour
         if (character == Chars.BlindMan)
         {
             blackImage.SetActive(true);
+            gRasterBM.SetActive(true);
+        }
+
+        if (character == Chars.GetUp)
+        {
+            blackImage.SetActive(true);
+            gRasterCU.SetActive(true);
+        }
+
+        if (character == Chars.BeQuiet)
+        {
+            blackImage.SetActive(true);
+            gRasterBQ.SetActive(true);
         }
 
         if (character == Chars.Menu)
         {
+            musicSrc.Play();
             //ShowCharButtons();
             SetSpeed(0.0f);
             HideUIElement(menuPauseButton);
@@ -408,6 +434,26 @@ if (PlayerPrefs.HasKey("sensorMode"))
     // Update is called once per frame
     void Update()
     {
+        if (useSensors)
+        {
+            if (rasterTimer < rasterTime)
+            {
+                rasterTimer += Time.deltaTime;
+            }
+            else if (gRasterBM.activeInHierarchy || gRasterCU.activeInHierarchy || gRasterBQ.activeInHierarchy)
+            {
+                gRasterBM.SetActive(false);
+                gRasterCU.SetActive(false);
+                gRasterBQ.SetActive(false);
+            }
+        }
+        else if (gRasterBM.activeInHierarchy || gRasterCU.activeInHierarchy || gRasterBQ.activeInHierarchy)
+        {
+            gRasterBM.SetActive(false);
+            gRasterCU.SetActive(false);
+            gRasterBQ.SetActive(false);
+        }
+
         FadeOutTitleAndVerse(titleTimer < titleTime);
 
         //Activate phrase control / particle system of current character:
@@ -451,8 +497,13 @@ if (PlayerPrefs.HasKey("sensorMode"))
             if (healingTimer < healingTime)
                 healingTimer += Time.deltaTime;
             else
+            {
                 blackImage.SetActive(false);
+                postProc.SetActive(false);
+            }
         }
+        else
+            postProc.SetActive(false);
 
         //Skip hint for continuing level (back from settings or bible text etc.):
         //if (!started)
@@ -485,11 +536,12 @@ if (PlayerPrefs.HasKey("sensorMode"))
         {
             if (character == Chars.Map)
             {
+                Debug.Log("load level 11");
                 SetCam((int)Chars.Menu);
                 SceneManager.LoadScene(11);
             }
-
-            SetCamAndRestart((int)Chars.Menu);
+            else
+                SetCamAndRestart((int)Chars.Menu);
         }
 
         if (speedControl)

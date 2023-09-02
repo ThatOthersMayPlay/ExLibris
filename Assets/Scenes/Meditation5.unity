@@ -616,7 +616,7 @@ MonoBehaviour:
   mainScene: 4
   skipToMainScene: 1
   useBuildIndex: 1
-  buildInd: 4
+  buildInd: 10
 --- !u!4 &662351863
 Transform:
   m_ObjectHideFlags: 0

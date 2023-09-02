@@ -405,30 +405,21 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.1
-  m_Text: 'Do you feel like
+  m_Text: 'Can you identify
 
-    the blind man?
+    with one of
 
-
-    Do you want to
-
-    encourage
-    him
-
-    or do you want
-
-    him to be quiet?
+    the characters?
 
 
+    Experience
 
-    Try a character
+    their
+    story
 
-    and
-    experience
+    from a new
 
-    the story from a
-
-    new perspective.'
+    perspective...'
 --- !u!222 &462456687
 CanvasRenderer:
   m_ObjectHideFlags: 0
