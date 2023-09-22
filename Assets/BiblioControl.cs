@@ -123,12 +123,12 @@ public class BiblioControl : MonoBehaviour
     //Control music in main menu:
     public AudioSource musicSrc;
 
-    public GameObject gRasterBM;
-    public GameObject gRasterCU;
-    public GameObject gRasterBQ;
+    //public GameObject gRasterBM;
+    //public GameObject gRasterCU;
+    //public GameObject gRasterBQ;
 
-    public float rasterTime = 2.0f;
-    public float rasterTimer = 0.0f;
+    //public float rasterTime = 2.0f;
+    //public float rasterTimer = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -145,19 +145,19 @@ public class BiblioControl : MonoBehaviour
         if (character == Chars.BlindMan)
         {
             blackImage.SetActive(true);
-            gRasterBM.SetActive(true);
+            //gRasterBM.SetActive(true);
         }
 
         if (character == Chars.GetUp)
         {
             blackImage.SetActive(true);
-            gRasterCU.SetActive(true);
+            //gRasterCU.SetActive(true);
         }
 
         if (character == Chars.BeQuiet)
         {
             blackImage.SetActive(true);
-            gRasterBQ.SetActive(true);
+            //gRasterBQ.SetActive(true);
         }
 
         if (character == Chars.Menu)
@@ -434,25 +434,25 @@ if (PlayerPrefs.HasKey("sensorMode"))
     // Update is called once per frame
     void Update()
     {
-        if (useSensors)
-        {
-            if (rasterTimer < rasterTime)
-            {
-                rasterTimer += Time.deltaTime;
-            }
-            else if (gRasterBM.activeInHierarchy || gRasterCU.activeInHierarchy || gRasterBQ.activeInHierarchy)
-            {
-                gRasterBM.SetActive(false);
-                gRasterCU.SetActive(false);
-                gRasterBQ.SetActive(false);
-            }
-        }
-        else if (gRasterBM.activeInHierarchy || gRasterCU.activeInHierarchy || gRasterBQ.activeInHierarchy)
-        {
-            gRasterBM.SetActive(false);
-            gRasterCU.SetActive(false);
-            gRasterBQ.SetActive(false);
-        }
+        //if (useSensors)
+        //{
+        //    if (rasterTimer < rasterTime)
+        //    {
+        //        rasterTimer += Time.deltaTime;
+        //    }
+        //    else if (gRasterBM.activeInHierarchy || gRasterCU.activeInHierarchy || gRasterBQ.activeInHierarchy)
+        //    {
+        //        gRasterBM.SetActive(false);
+        //        gRasterCU.SetActive(false);
+        //        gRasterBQ.SetActive(false);
+        //    }
+        //}
+        //else if (gRasterBM.activeInHierarchy || gRasterCU.activeInHierarchy || gRasterBQ.activeInHierarchy)
+        //{
+        //    gRasterBM.SetActive(false);
+        //    gRasterCU.SetActive(false);
+        //    gRasterBQ.SetActive(false);
+        //}
 
         FadeOutTitleAndVerse(titleTimer < titleTime);
 
@@ -589,6 +589,18 @@ if (PlayerPrefs.HasKey("sensorMode"))
         //SceneManager.LoadScene(scene.buildIndex - 1);
         //now reload current scene instead of "in between scene":
         SceneManager.LoadScene(scene.buildIndex);
+    }
+
+    //Overload to show usage of sensor mode first:
+    public void SetCamAndRestartChar(int ch)
+    {
+        if (useSensors)
+        {
+            SetCam((Chars)ch);
+            SceneManager.LoadScene(12);
+        }
+        else
+            SetCamAndRestart(ch);
     }
 
     public void SetCam(Chars ch)

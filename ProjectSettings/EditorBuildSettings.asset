@@ -21,9 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/AR_Touch.unity
     guid: 349bc3bd59ae65e48b9ae77c695648e4
   - enabled: 0
-    path: Assets/Scenes/BibleText.unity
-    guid: fa5b40a3722c88446b2e34b1a2b42d4a
-  - enabled: 0
     path: Assets/Scenes/InBetween.unity
     guid: 18ffb8cb73d084047b235faf29ba5eb8
   - enabled: 1
@@ -62,4 +59,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndOfMap.unity
     guid: 962c32dfc66cac24588d399503669cfc
+  - enabled: 1
+    path: Assets/Scenes/Hint_SensorMode.unity
+    guid: 53076e13e2c85b9409db2b8112e61de6
+  - enabled: 1
+    path: Assets/Scenes/BibleText.unity
+    guid: fa5b40a3722c88446b2e34b1a2b42d4a
   m_configObjects: {}
