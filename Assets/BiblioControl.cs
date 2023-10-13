@@ -130,9 +130,15 @@ public class BiblioControl : MonoBehaviour
     //public float rasterTime = 2.0f;
     //public float rasterTimer = 0.0f;
 
+    public static int language = 0;
+    public GameObject[] texObjEngl;
+
     // Start is called before the first frame update
     void Start()
     {
+        LoadLanguage();
+        ApplyLanguage();
+
         ConfigProgressBar();
 
         if (GetSceneTime() > 0.1f && character != Chars.Menu)
@@ -234,6 +240,64 @@ public class BiblioControl : MonoBehaviour
         ShowTitleAndVerse();
     }
 
+    //Switch language:
+    public void SwitchLanguage()
+    {
+        if (language == 0)
+            language = 1;
+        else language = 0;
+        SaveLanguage();
+        ApplyLanguage();
+    }
+
+    //Save language to PlayerPrefs:
+    public void SaveLanguage()
+    {
+        if (language == 0)
+            PlayerPrefs.SetInt("language", 0);
+        else if (language == 1)
+            PlayerPrefs.SetInt("language", 1);
+    }
+
+    //Load language from PlayerPrefs:
+    public void LoadLanguage()
+    {
+        if (PlayerPrefs.HasKey("language"))
+            language = PlayerPrefs.GetInt("language");
+    }
+
+    //Apply language to all text objects:
+    public void ApplyLanguage()
+    {
+        string origName = "Text";
+        if (language == 0)
+        {
+            for (int i = 0; i < texObjEngl.Length; i++)
+            {
+                for (int j = 0; j < texObjEngl[i].transform.childCount; j++)
+                {
+                    if (texObjEngl[i].transform.GetChild(j).name == origName + "-DE")
+                        texObjEngl[i].transform.GetChild(j).gameObject.SetActive(true);
+                    else
+                        texObjEngl[i].transform.GetChild(j).gameObject.SetActive(false);
+                }
+            }
+        }
+        else if (language == 1)
+        {
+            for (int i = 0; i < texObjEngl.Length; i++)
+            {
+                for (int j = 0; j < texObjEngl[i].transform.childCount; j++)
+                {
+                    if (texObjEngl[i].transform.GetChild(j).name == origName)
+                        texObjEngl[i].transform.GetChild(j).gameObject.SetActive(true);
+                    else
+                        texObjEngl[i].transform.GetChild(j).gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
     //public void FirePhrase()
     //{
     //    phraseFire[(int)character].Play();
@@ -301,25 +365,25 @@ public class BiblioControl : MonoBehaviour
             SensorModeOn(false);
         }
         else
-{
-gyroAvailable = true;
-if (PlayerPrefs.HasKey("sensorMode"))
         {
-            if (PlayerPrefs.GetString("sensorMode") == "on")
+            gyroAvailable = true;
+            if (PlayerPrefs.HasKey("sensorMode"))
             {
-                //sensOnBut.SetActive(true);
-                //sensOffBut.SetActive(false);
-                //sensNABut.SetActive(false);
-                SensorModeOn(true);
+                if (PlayerPrefs.GetString("sensorMode") == "on")
+                {
+                    //sensOnBut.SetActive(true);
+                    //sensOffBut.SetActive(false);
+                    //sensNABut.SetActive(false);
+                    SensorModeOn(true);
+                }
+                else if (PlayerPrefs.GetString("sensorMode") == "off")
+                {
+                    //sensOnBut.SetActive(false);
+                    //sensOffBut.SetActive(true);
+                    //sensNABut.SetActive(false);
+                    SensorModeOn(false);
+                }
             }
-            else if (PlayerPrefs.GetString("sensorMode") == "off")
-            {
-                //sensOnBut.SetActive(false);
-                //sensOffBut.SetActive(true);
-                //sensNABut.SetActive(false);
-                SensorModeOn(false);
-            }
-          }
         }
     }
 

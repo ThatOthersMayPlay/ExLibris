@@ -405,7 +405,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.1
-  m_Text: Read Mark 10, 46-52
+  m_Text: Read Mark 10, 46-52.
 --- !u!222 &462456687
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -614,6 +614,8 @@ MonoBehaviour:
   touchTime: 0
   mainScene: 4
   skipToMainScene: 1
+  useBuildIndex: 0
+  buildInd: -1
 --- !u!4 &662351863
 Transform:
   m_ObjectHideFlags: 0

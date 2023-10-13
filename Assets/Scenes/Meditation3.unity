@@ -405,7 +405,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.1
-  m_Text: "Find connections\nwith\r your current\nlife situation"
+  m_Text: "Find connections\nwith\r your current\nlife situation."
 --- !u!222 &462456687
 CanvasRenderer:
   m_ObjectHideFlags: 0

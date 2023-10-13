@@ -405,7 +405,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.1
-  m_Text: "You could also\npray\r for personal\nrevelations"
+  m_Text: "You could also\npray\r for personal\nrevelations."
 --- !u!222 &462456687
 CanvasRenderer:
   m_ObjectHideFlags: 0

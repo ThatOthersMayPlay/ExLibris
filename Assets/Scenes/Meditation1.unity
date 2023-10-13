@@ -405,7 +405,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.1
-  m_Text: "find a quiet place\nwhere\r you can\nfocus and reflect"
+  m_Text: "Find a quiet place\nwhere\r you can\nfocus and reflect."
 --- !u!222 &462456687
 CanvasRenderer:
   m_ObjectHideFlags: 0

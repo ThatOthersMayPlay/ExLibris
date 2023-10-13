@@ -405,11 +405,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.1
-  m_Text: 'sensor mode
+  m_Text: 'Experience mode
 
     provides a more
 
-    immersive play'
+    immersive play.'
 --- !u!222 &462456687
 CanvasRenderer:
   m_ObjectHideFlags: 0
