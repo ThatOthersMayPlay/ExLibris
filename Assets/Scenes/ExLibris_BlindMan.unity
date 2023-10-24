@@ -9628,7 +9628,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1005}
+  m_AnchoredPosition: {x: 0, y: -900}
   m_SizeDelta: {x: 500, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &288134494
@@ -23660,7 +23660,6 @@ MonoBehaviour:
   - {fileID: 1827014450}
   - {fileID: 1638926381}
   - {fileID: 1415633635}
-  - {fileID: 2015077185}
   - {fileID: 1239524696}
   - {fileID: 1934146765}
   - {fileID: 852679981}
@@ -37510,18 +37509,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 798160379}
-        m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
-        m_MethodName: ShowUIElement
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2015077185}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1505265342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42428,18 +42415,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 798160379}
-        m_TargetAssemblyTypeName: MenuControl, Assembly-CSharp
-        m_MethodName: HideUIElement
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2015077185}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1827014453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44225,7 +44200,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2015077186
 RectTransform:
   m_ObjectHideFlags: 0
