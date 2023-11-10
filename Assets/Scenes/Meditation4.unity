@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f226cddcf84c98241968c8d0d11b44a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 4
+  timer: 5
   fadeOutUI: {fileID: 2132872961}
   toNextLevel: 1
   lv: 1

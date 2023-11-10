@@ -609,7 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f226cddcf84c98241968c8d0d11b44a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 5
+  timer: 7
   fadeOutUI: {fileID: 2132872961}
   toNextLevel: 1
   lv: 1
@@ -618,6 +618,8 @@ MonoBehaviour:
   touchTime: 0
   mainScene: -1
   skipToMainScene: 0
+  useBuildIndex: 0
+  buildInd: -1
 --- !u!4 &662351863
 Transform:
   m_ObjectHideFlags: 0

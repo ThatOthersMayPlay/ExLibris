@@ -117,6 +117,7 @@ public class BiblioControl : MonoBehaviour
     public GameObject subTitle;
     public GameObject verse;
     public GameObject verseSmall;
+    public GameObject musicBy;
     public float titleTimer = 0.0f;
     public float titleTime = 2.0f;
 
@@ -304,7 +305,7 @@ public class BiblioControl : MonoBehaviour
     //}
 
 
-    //Setup title/verse setting for Intro, Menu and game:
+    //Setup title/verse/music by setting for Intro, Menu and game:
     public void ShowTitleAndVerse()
     {
         if (character == Chars.Menu)
@@ -312,6 +313,7 @@ public class BiblioControl : MonoBehaviour
             title.SetActive(true);
             subTitle.SetActive(false);
             verse.SetActive(false);
+            musicBy.SetActive(false);
             verseSmall.SetActive(false);
         }
         else if (character == Chars.Map)
@@ -319,6 +321,7 @@ public class BiblioControl : MonoBehaviour
             title.SetActive(true);
             subTitle.SetActive(true);
             verse.SetActive(true);
+            musicBy.SetActive(true);
             verseSmall.SetActive(false);
         }
         else
@@ -326,6 +329,7 @@ public class BiblioControl : MonoBehaviour
             title.SetActive(false);
             subTitle.SetActive(false);
             verse.SetActive(false);
+            musicBy.SetActive(false);
             verseSmall.SetActive(true);
         }
     }
@@ -343,6 +347,7 @@ public class BiblioControl : MonoBehaviour
             subTitle.SetActive(false);
             verse.SetActive(false);
             verseSmall.SetActive(false);
+            musicBy.SetActive(false);
         }
     }
 

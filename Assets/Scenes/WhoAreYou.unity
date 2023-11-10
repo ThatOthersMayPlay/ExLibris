@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f226cddcf84c98241968c8d0d11b44a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 4
+  timer: 7
   fadeOutUI: {fileID: 2132872961}
   toNextLevel: 1
   lv: 1
@@ -906,7 +906,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 99377e09309160a45a89f2aa679e6aca, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8d18caf9b4a9cfa4b8a0f58bd011db44, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.6
   m_Pitch: 1
